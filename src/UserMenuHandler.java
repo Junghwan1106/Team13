@@ -106,8 +106,8 @@ public class UserMenuHandler {
         System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
-        System.out.println("[ Burgers MENU ]");
-        List<Item> burgerItems = menuContext.getMenuItems("Burgers");
+        System.out.println("[ 메인요리 메뉴 ]");
+        List<Item> burgerItems = menuContext.getMenuItems("메인 요리");
         printMenuItems(burgerItems);
 
         handleMenuItemInput(burgerItems);
@@ -137,8 +137,8 @@ public class UserMenuHandler {
         System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
-        System.out.println("[ Frozen Custard MENU ]");
-        List<Item> frozenCustardItems = menuContext.getMenuItems("Frozen Custard");
+        System.out.println("[ 얼음 빙수 메뉴 ]");
+        List<Item> frozenCustardItems = menuContext.getMenuItems("얼음 빙수");
         printMenuItems(frozenCustardItems);
 
         handleMenuItemInput(frozenCustardItems);
@@ -148,8 +148,8 @@ public class UserMenuHandler {
         System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
-        System.out.println("[ Drinks MENU ]");
-        List<Item> drinkItems = menuContext.getMenuItems("Drinks");
+        System.out.println("[ 특제 음료 메뉴 ]");
+        List<Item> drinkItems = menuContext.getMenuItems("특제 음료");
         printMenuItems(drinkItems);
 
         handleMenuItemInput(drinkItems);
@@ -159,8 +159,8 @@ public class UserMenuHandler {
         System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
-        System.out.println("[ Beer MENU ]");
-        List<Item> beerItems = menuContext.getMenuItems("Beer");
+        System.out.println("[ 기분 좋아지는 약 메뉴 ]");
+        List<Item> beerItems = menuContext.getMenuItems("기분 좋아지는 약");
         printMenuItems(beerItems);
 
         handleMenuItemInput(beerItems);
