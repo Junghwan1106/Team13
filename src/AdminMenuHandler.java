@@ -13,9 +13,10 @@ public class AdminMenuHandler {
 
     // 메인 관리자 메뉴를 표시합니다.
     public void displayAdminMenu() {
-        System.out.println("관리자 ToToRo's 페이지다. 이말이양!");
+
+        System.out.println("기사(knight) 식당(Restaurant)관리자(Admin)페이지");
         System.out.println("1. 대기주문 목록");
-        System.out.println("2. 완료주문 목록");
+        System.out.println("2. 완료주문(spell) 목록");
         System.out.println("3. 상품 생성");
         System.out.println("4. 상품 삭제");
         System.out.println("5. 메인 페이지");
