@@ -12,14 +12,14 @@ public class UserMenuHandler {
 
     // 메인 메뉴 출력
     public static void displayMainMenu() {
-        System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
+        System.out.println("기사(knight)식당(restaurant)에 오신걸 환영합니다.");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n");
 
-        System.out.println("[ SHAKESHACK MENU ]");
+        System.out.println("[ 기사(knight)식당(restaurant) 메뉴(Menu) ]");
         List<Menu> mainMenus = menuContext.getMenus("Main");
         int nextNum = printMenu(mainMenus, 1);
 
-        System.out.println("[ ORDER MENU ]");
+        System.out.println("[ 주문(ORDER) 메뉴(MENU) ]");
         List<Menu> orderMenus = menuContext.getMenus("Order");
         nextNum=printMenu(orderMenus, nextNum);
         System.out.println(nextNum+". recent orders |   완료된 최근주문 3개와 현재 대기중인 주문들을 보여줍니다");
@@ -103,7 +103,7 @@ public class UserMenuHandler {
 
     // 버거 메뉴판 출력
     private static void displayBurgersMenu() {
-        System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
+        System.out.println("기사(knight)식당(restaurant)에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
         System.out.println("[ 메인요리 메뉴 ]");
@@ -134,7 +134,7 @@ public class UserMenuHandler {
     }
     // 아이스크림 메뉴 출력
     private static void displayFrozenCustardMenu() {
-        System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
+        System.out.println("기사(knight)식당(restaurant)에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
         System.out.println("[ 얼음 빙수 메뉴 ]");
@@ -145,7 +145,7 @@ public class UserMenuHandler {
     }
     // 음료 메뉴 출력
     private static void displayDrinksMenu() {
-        System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
+        System.out.println("기사(knight)식당(restaurant)에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
         System.out.println("[ 특제 음료 메뉴 ]");
@@ -156,7 +156,7 @@ public class UserMenuHandler {
     }
     // 맥주 메뉴 출력
     private static void displayBeerMenu() {
-        System.out.println("SHAKESHACK BURGER 에 오신걸 환영합니다.");
+        System.out.println("기사(knight)식당(restaurant)에 오신걸 환영합니다.");
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
 
         System.out.println("[ 기분 좋아지는 약 메뉴 ]");

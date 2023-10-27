@@ -13,10 +13,12 @@ public class AdminMenuHandler {
 
     // 메인 관리자 메뉴를 표시합니다.
     public void displayAdminMenu() {
-        System.out.println("Admin ToToRo's 페이지다. 이말이양!");
+        System.out.println("기사(knight) 식당(Restaurant)관리자(Admin)페이지");
         System.out.println("1. 대기주문 목록");
-        System.out.println("2. 완료주문 목록");
-        System.out.println("3. 메인 페이지");
+        System.out.println("2. 완료주문(spell) 목록");
+        System.out.println("3. 상품 생성");
+        System.out.println("4. 상품 삭제");
+        System.out.println("5. 메인 페이지");
         System.out.print("항목을 선택하세요: ");
 
         int input = 0;
@@ -37,8 +39,13 @@ public class AdminMenuHandler {
                 printCompletedOrder();
                 break;
             case 3:
-                UserMenuHandler.displayMainMenu();
+                createItem();
                 break;
+            case 4:
+                deleteItem();
+                break;
+            case 5:
+                UserMenuHandler.displayMainMenu();
             default:
                 System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
                 displayAdminMenu();
@@ -209,6 +216,122 @@ public class AdminMenuHandler {
             System.out.println("잘못된 입력입니다.");
             System.out.println("========================================");
             printCompletedOrder();
+        }
+    }
+    //삭제할 상품 찾기
+    public boolean findDeleteMenu(int menu, String name) {
+        ArrayList<String> menuNames = new ArrayList<>(Arrays.asList("Burgers", "Frozen Custard", "Drinks", "Beer"));
+        for (Item item : menuContext.getMenuItems(menuNames.get(menu - 1))) {
+            if (item.getName().equals(name)) {
+                if (!menuContext.getMenuItems(menuNames.get(menu - 1)).isEmpty()) {
+                    menuContext.deleteItemFromMenu(menuNames.get(menu - 1), item);
+                    return true;
+                }
+                else return false;
+            }
+        }
+        return false;
+    }
+
+    //메인 페이지로 돌아가거나 다시 상품 삭제를 할지 묻는 부분
+    private int wantToMainOrAgain() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1. 메뉴판  2. 상품삭제");
+
+        int result = scanner.nextInt();
+
+        return result;
+    }
+    //상품 생성
+    private void createItem() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("새로운 상품 정보를 입력해주세요.");
+        System.out.print("메뉴: ");
+        int menu = 0;
+        try{
+            menu = scanner.nextInt();
+        }catch (Exception e){
+            System.out.println("잘못된 요청입니다. 다시입력해주세요!");
+            createItem();
+        }
+        scanner.nextLine();
+        System.out.print("이름: ");
+        String name = scanner.nextLine();
+        System.out.print("설명: ");
+        String description = scanner.nextLine();
+        System.out.print("가격: ");
+        Double price = 0.0;
+        try{
+            price = scanner.nextDouble();
+        }catch (Exception e){
+            System.out.println("잘못된 요청입니다. 다시입력해주세요!");
+            createItem();
+        }
+
+        // 새로운 상품 생성
+        Item newItem = new Item(name, price, description);
+
+        switch (menu) {
+            case 1:
+                menuContext.addItemToMenu("Burgers", newItem);
+                break;
+            case 2:
+                menuContext.addItemToMenu("Frozen Custard", newItem);
+                break;
+            case 3:
+                menuContext.addItemToMenu("Drinks", newItem);
+                break;
+            case 4:
+                menuContext.addItemToMenu("Beer", newItem);
+                break;
+            default:
+                System.out.println("잘못된 메뉴입니다.");
+                break;
+        }
+
+        System.out.println("새로운 상품이 생성되었습니다.");
+        UserMenuHandler.displayMainMenu();
+    }
+
+    //상품 삭제
+    private void deleteItem() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("삭제할 상품 정보를 입력해주세요.");
+        System.out.print("메뉴: ");
+        int menu = 0;
+        try{
+            menu = scanner.nextInt();
+        }catch (Exception e){
+            System.out.println("잘못된 요청입니다. 다시 입력하세요.");
+            deleteItem();
+        }
+        scanner.nextLine();
+
+        System.out.print("이름: ");
+        String name = scanner.nextLine();
+
+        int menuSize = menuContext.getMenus("Main").size();
+
+        if (menu >= 1 && menu <= menuSize) {
+            boolean isMenuExist = findDeleteMenu(menu, name);
+            if (isMenuExist) {
+                System.out.println("상품이 삭제되었습니다.\n");
+                UserMenuHandler.displayMainMenu();
+            }
+            else {
+                System.out.println("해당 상품이 존재하지 않습니다.\n");
+                int wantResult = wantToMainOrAgain();
+                if(wantResult==2) {
+                    deleteItem();
+                }else {
+                    UserMenuHandler.displayMainMenu();
+                }
+            }
+        } else {
+            System.out.println("잘못된 메뉴입니다.");
+            deleteItem();
         }
     }
 }

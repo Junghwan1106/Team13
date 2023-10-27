@@ -58,10 +58,29 @@ public class MenuContext {
         );
 
         addMenuItems("기분 좋아지는 약",
-                new Item("이세카이의 트럭 소환", 4.0, "브레이크가 고장난 8t 트럭-! (한문철: 이건 좀;)"),
+                new Item("이세카이의 트럭 소환", 4.0, "브레이크가 고장난 8t 트럭-! "),
                 new Item("메타버스 입장권", 4.0, "고양이 수인 냥냥 넷카마 가능-!")
         );
     }
+    // 상품 생성 리스트 추가
+    public void addItemToMenu(String menu, Item item) {
+        List<Item> menuList = menuItems.get(menu);
+
+        if (menuList == null) {
+            menuList = new ArrayList<>();
+            menuItems.put(menu, menuList);
+        }
+        menuList.add(item);
+    }
+    // 상품 삭제 리스트 추가
+    public void deleteItemFromMenu(String menu, Item item) {
+        List<Item> menuList = menuItems.get(menu);
+
+        if (menuList != null) {
+            menuList.remove(item);
+        }
+    }
+
     // 장바구니에 상품 추가
     public void addToCart(Item menuItem) {
         cart.add(menuItem);

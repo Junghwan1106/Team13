@@ -1,4 +1,4 @@
-public class ShakeShackBurgerApplication {
+public class KnightRestaurantApplication {
 
     /**             APP 실행            */
     public static void main(String[] args) {
