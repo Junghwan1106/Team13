@@ -222,7 +222,7 @@ public class AdminMenuHandler {
 
     //삭제할 상품 찾기
     public boolean findDeleteMenu(int menu, String name) {
-        ArrayList<String> menuNames = new ArrayList<>(Arrays.asList("Burgers", "Frozen Custard", "Drinks", "Beer"));
+        ArrayList<String> menuNames = new ArrayList<>(Arrays.asList("메인 요리", "얼음 빙수", "특제 음료", "기분 좋아지는 약"));
         for (Item item : menuContext.getMenuItems(menuNames.get(menu - 1))) {
             if (item.getName().equals(name)) {
                 if (!menuContext.getMenuItems(menuNames.get(menu - 1)).isEmpty()) {
@@ -249,7 +249,7 @@ public class AdminMenuHandler {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("새로운 상품 정보를 입력해주세요.");
-        System.out.print("메뉴: ");
+        System.out.print("메뉴 번호(1~4): ");
         int menu = 0;
         try{
             menu = scanner.nextInt();
@@ -276,16 +276,16 @@ public class AdminMenuHandler {
 
         switch (menu) {
             case 1:
-                menuContext.addItemToMenu("Burgers", newItem);
+                menuContext.addItemToMenu("메인 요리", newItem);
                 break;
             case 2:
-                menuContext.addItemToMenu("Frozen Custard", newItem);
+                menuContext.addItemToMenu("얼음 빙수", newItem);
                 break;
             case 3:
-                menuContext.addItemToMenu("Drinks", newItem);
+                menuContext.addItemToMenu("특제 음료", newItem);
                 break;
             case 4:
-                menuContext.addItemToMenu("Beer", newItem);
+                menuContext.addItemToMenu("기분 좋아지는 약", newItem);
                 break;
             default:
                 System.out.println("잘못된 메뉴입니다.");
@@ -301,7 +301,7 @@ public class AdminMenuHandler {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("삭제할 상품 정보를 입력해주세요.");
-        System.out.print("메뉴: ");
+        System.out.print("메뉴 번호(1~4): ");
         int menu = 0;
         try{
             menu = scanner.nextInt();
