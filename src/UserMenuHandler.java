@@ -19,15 +19,16 @@ public class UserMenuHandler {
         List<Menu> mainMenus = menuContext.getMenus("Main");
         int nextNum = printMenu(mainMenus, 1);
 
+        System.out.println();
         System.out.println("[ 주문(ORDER) 메뉴(MENU) ]");
         List<Menu> orderMenus = menuContext.getMenus("Order");
         nextNum=printMenu(orderMenus, nextNum);
-        System.out.println(nextNum+". recent orders |   완료된 최근주문 3개와 현재 대기중인 주문들을 보여줍니다");
+        System.out.println(nextNum+". recent orders         | 완료된 최근주문 3개와 현재 대기중인 주문들을 보여줍니다");
         UserMenuHandler.handleMainMenuInput();
     }
     private static int printMenu(List<Menu> menus, int num) {
         for (int i=0; i<menus.size(); i++) {
-            System.out.println(num++ + ". " + menus.get(i).getName() + "   | " + menus.get(i).getDescription());
+            System.out.printf("%d. %-20s | %s\n",num++, menus.get(i).getName(), menus.get(i).getDescription());
         }
         return num;
     }
@@ -129,7 +130,7 @@ public class UserMenuHandler {
     public static void printMenuItems(List<Item> items) {
         for (int i=0; i<items.size(); i++) {
             int num = i + 1;
-            System.out.println(num + ". " + items.get(i).getName() + "   | " + items.get(i).getPrice() + " | " + items.get(i).getDescription());
+            System.out.printf("%d. %-20s | W %4.1f | %s\n",num, items.get(i).getName(), items.get(i).getPrice(), items.get(i).getDescription());
         }
     }
     // 아이스크림 메뉴 출력

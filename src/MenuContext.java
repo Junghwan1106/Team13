@@ -89,9 +89,7 @@ public class MenuContext {
     // 장바구니에 상품 삭제
     public void displayCart() {
         for (Item item : cart) {
-            System.out.println(item.getName() + " | "
-                    + item.getPrice() + " | "
-                    + item.getDescription());
+            System.out.printf("%-20s | W%4.1f | %s\n",item.getName(),item.getPrice(), item.getDescription());
         }
     }
 
