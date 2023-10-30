@@ -14,7 +14,7 @@
 
 ## 팀 소개
 #### 팀 이름
-<div><h5 align="center" > 전생에 자바 창시자 『제임스 고슬링』이였던 내가, <br>인생 2회차를 시작하니 『Hello World』를 출력하라고?! (何に？！) </h5>
+<div><h3 align="center" > 전생에 자바 창시자 『제임스 고슬링』이였던 내가, <br>인생 2회차를 시작하니 『Hello World』를 출력하라고?! (何に？！) </h3>
 <h5 align="left"> 팀 멤버 </h5>
 </div>
 
@@ -43,7 +43,7 @@
         <tr>
             <td width="200">웃으면서 밝게 지내는 걸 좋아합니다. <br>협업시 항상 웃는 모습으로 !</td>
             <td width="200">코드로 세상을 바꾸고 싶습니다. <br>like 제임스 고슬링</td>
-            <td width="200">제가 현존하는 최고 자바머신이 되지 않을까요?</td>
+            <td width="200">간바레(がんばれ！) 응원담당이자,<br>현존하는 최고 자바머신이 되지 않을까요?</td>
             <td width="200"> 아이디어뱅크 그 자체입니다.<br>은행 잔고는 없지만요.ㅎ;</td>
         </tr>
     </tbody>
@@ -51,13 +51,13 @@
 
 ## 프로젝트 소개
 
-#### 프로젝트 이름
+### 프로젝트 이름
 
 기사(knight)식당(restaurant)에 오신걸 환영합니다.
 - 프로젝트 지속기간: 2023.10.24-2023.10.30
 - 개발 언어: <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" />
 - 프로젝트 노션: <td><a href="https://coordinated-spice-157.notion.site/2-Hello-World-11aa4c40170f41c7be809d4867470485?pvs=4">클릭시 이동합니다.</a></td>
-#### 개요
+### 개요
 음식점에서 주문할 때 사용하는 키오스크를 구현한 프로젝트입니다.<br>
 고객이 원하는 메뉴를 주문하고 해당 주문을 취소할 수 있도록 하였습니다.<br>
 또한, 해당 주문에 대해 완료가 되었는지 여부와 최근 완료가 된 주문을 볼 수 있습니다.
@@ -126,4 +126,129 @@
             - 삭제이전에 주문된 주문정보에서는 삭제 되지 않는다.
 
 ## 기능 구현에 대한 기술
-아직 안넣음
+### 1. SOLID 원칙
+SOLID 원칙은 객체 지향 프로그래밍과 설계를 할 때 지켜야 할 원칙<br>
+
+해당 프로젝트에서 적용한 원칙은 다음과 같습니다.<br>
+#### Single Responsibility Principle : 각 메소드는 하나의 기능을 수행한다.
+displayAdminMenu() : 관리자 메뉴를 표시, 사용자 입력을 처리
+
+        // 관리자 메뉴를 표시하고 사용자 입력을 처리하는 메소드
+        public void displayAdminMenu() {
+            //...
+        }
+
+#### Open-Closed Principle : 개방-폐쇄 원칙에 따라 확장에 열려있고, 수정에 대해 닫혀있다.
+MenuContext.class : 새로운 아이템이 추가되거나 삭제될 때는 addItemToMenu() 또는 deleteItemFromMenu 메서드만을 활용해서 확장
+
+        // 새로운 아이템을 추가하는 메소드
+        public void addItemToMenu(String category, Item item) {
+            //...
+        }
+
+        // 아이템을 삭제하는 메소드
+        public void deleteItemFromMenu(String category, Item item) {
+            //...
+        }
+
+#### Liskov Substitution Principle : 부모 객체와 이를 상속한 자식 객체가 있을 때 부모 객체를 호출하는 동작에서 자식 객체가 부모 객체를 완전히 대체할 수 있다.
+Menu.class :기본적인 메뉴 아이템에 대한 정보를 가지고 있음.
+Item.class : Menu.class를 상속해서 추가적인 가격 정보를 가짐.
+
+        public class Item extends Menu {
+            /...
+        }
+#### Dependency Injection : 외부에서 생성된 객체를 주입받아 사용한다.
+Ex) MenuContext.class : 생성자를 통해 Menu.class를 주입받아 사용 (의존성 주입)
+
+        public AdminMenuHandler(MenuContext menuContext) {
+            this.menuContext = menuContext;
+            this.scanner = new Scanner(System.in);
+        }
+
+### 2. List Collection
+#### List Collection을 사용한 이유
+* 객체 타입의 다중배열이 아닌 List Collection을 활용하였습니다.<br/>
+    * 다중배열을 사용하게 되면 index처리를 하게 되면서 가독성이 떨어지게 되므로 List를 선택했습니다.<br/>
+    * 객체 타입의 다중 배열을 사용할 경우, 변수를 선언할 때 크기를 지정해야 하므로 확장성이 떨어진다는 단점이 있습니다.<br/>
+
+```java
+public class MenuContext {
+
+	private Map<String, List<Menu>> menus;
+	private Map<String, List<Item>> menuItems;
+	private List<Item> cart;
+	private double totalPrice;
+	private int orderNumber;
+	private List<Order> waitingOrders; // add - 대기 주문 상품
+	private List<Order> completedOrders; // add - 완료된 주문 상품
+	private String requestContent;
+  
+}  
+```
+
+* 장바구니, 대기 주문 목록, 완료 처리된 목록을 List 타입의 변수를 선언하였습니다.<br/><br/>
+    * Item Class 타입의 객체를 장바구니 List에 담으면 Cart에 저장이 됩니다.<br/>
+    * 장바구니에 있는 상품을 주문하게 되면 새로운 new Order 클래스 타입의 order 객체를 생성합니다.<br/>
+* 생성된 order 객체의 멤버변수인 orderItems List에 장바구니의 요소들을 담습니다. <br/><br/>
+  ```java
+    private static void setWaitingOrder(String request) {
+        Order order = new Order();
+        Date now = new Date();
+    
+        // List의 깊은 복사
+        List<Item> it = new ArrayList<>();
+        for(Item its : menuContext.getCart()){
+          it.add(its);
+    }
+    
+        order.setOrderItems(it);
+        order.setTotalPrice(menuContext.getTotalPrice());
+        order.setRequestContent(request); //요청 사항
+        order.setOrderDate(now);
+        order.generateOrderCnt();
+        order.setOrderNum(menuContext.getOrderNumber());
+        menuContext.addToWaitingOrder(order);
+    }
+  ```
+  * ***이때 깊은 복사(Deep Copy)를 하여 장바구니의 요소들의 값이 변해도 orderItems 내용은 변하지 않도록 합니다.*** <br/>
+  * waitingOrders에 생성된 order 객체를 요소로 add 시켜 해당 주문을 대기 중인 주문 목록에 추가합니다. <br/>
+
+### 3. 날짜는 ISO 8601 형식으로 조합된 UTC 날짜 및 시간
+  ```java
+    Date date = selectedOrder.getOrderDate();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:XXX");
+    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+    String dateString = sdf.format(date);
+    System.out.println("주문 일시: " + dateString);
+  ```
+* Date 객체를 생성하여 해당 객체를 SimpleDateFormat 객체에 담습니다.<br/>
+* SimpleDateFormat 객체의 format 메소드를 사용하여 날짜를 ISO 8601 형식으로 변환합니다.<br/>
+* 변환된 날짜를 출력합니다.<br/>
+* 이때, 날짜를 출력할 때는 SimpleDateFormat 객체의 setTimezone 메소드를 사용하여 한국 시간대로 설정합니다.***<br/>
+* 이렇게 함으로써, 날짜를 출력할 때 한국 시간대로 출력이 되어 사용자가 보기에 편리합니다.***<br/>
+* ***또한, 날짜를 출력할 때는 Date 객체를 사용하지 않고, LocalDateTime 객체를 사용하여 출력할 수도 있습니다.***<br/>
+  ```java
+    LocalDateTime localDateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss:XXX");
+    String formattedString = localDateTime.format(formatter);
+    System.out.println("주문 일시: " + formattedString);
+  ```
+### 4. Tread.sleep() 메소드
+* Thread.sleep() 메소드는 현재 실행중인 스레드를 지정된 시간동안 멈추게 합니다.<br/>
+* 해당 메소드를 사용한 이유는 주문이 완료되었을 때, 3초간 멈추게 하여 사용자가 주문이 완료되었음을 확인할 수 있도록 하기 위함입니다.<br/>
+  ```java
+    public static void completeOrder() {
+        System.out.println("주문이 완료되었습니다.");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+  ```
+
+### 환경설정
+Language : Java 11 <br>
+IDLE : IntelliJ <br>
+JDK : 17.0.8.1 LTS
