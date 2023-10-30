@@ -43,7 +43,7 @@
         <tr>
             <td width="200">웃으면서 밝게 지내는 걸 좋아합니다. <br>협업시 항상 웃는 모습으로 !</td>
             <td width="200">코드로 세상을 바꾸고 싶습니다. <br>like 제임스 고슬링</td>
-            <td width="200">간바레(がんばれ！) 응원담당이자,<br>현존하는 최고 자바머신이 되지 않을까요?</td>
+            <td width="200">간바레(がんばれ！)<br> 응원담당이자,<br>현존하는 최고 자바머신이 되지 않을까요?</td>
             <td width="200"> 아이디어뱅크 그 자체입니다.<br>은행 잔고는 없지만요.ㅎ;</td>
         </tr>
     </tbody>
@@ -131,7 +131,7 @@ SOLID 원칙은 객체 지향 프로그래밍과 설계를 할 때 지켜야 할
 
 해당 프로젝트에서 적용한 원칙은 다음과 같습니다.<br>
 #### Single Responsibility Principle : 각 메소드는 하나의 기능을 수행한다.
-displayAdminMenu() : 관리자 메뉴를 표시, 사용자 입력을 처리
+* displayAdminMenu() : 관리자 메뉴를 표시, 사용자 입력을 처리
 
         // 관리자 메뉴를 표시하고 사용자 입력을 처리하는 메소드
         public void displayAdminMenu() {
@@ -139,7 +139,7 @@ displayAdminMenu() : 관리자 메뉴를 표시, 사용자 입력을 처리
         }
 
 #### Open-Closed Principle : 개방-폐쇄 원칙에 따라 확장에 열려있고, 수정에 대해 닫혀있다.
-MenuContext.class : 새로운 아이템이 추가되거나 삭제될 때는 addItemToMenu() 또는 deleteItemFromMenu 메서드만을 활용해서 확장
+* MenuContext.class : 새로운 아이템이 추가되거나 삭제될 때는 addItemToMenu() 또는 deleteItemFromMenu 메서드만을 활용해서 확장
 
         // 새로운 아이템을 추가하는 메소드
         public void addItemToMenu(String category, Item item) {
@@ -152,14 +152,14 @@ MenuContext.class : 새로운 아이템이 추가되거나 삭제될 때는 addI
         }
 
 #### Liskov Substitution Principle : 부모 객체와 이를 상속한 자식 객체가 있을 때 부모 객체를 호출하는 동작에서 자식 객체가 부모 객체를 완전히 대체할 수 있다.
-Menu.class :기본적인 메뉴 아이템에 대한 정보를 가지고 있음.
-Item.class : Menu.class를 상속해서 추가적인 가격 정보를 가짐.
+* Menu.class :기본적인 메뉴 아이템에 대한 정보를 가지고 있음.
+* Item.class : Menu.class를 상속해서 추가적인 가격 정보를 가짐.
 
         public class Item extends Menu {
             /...
         }
 #### Dependency Injection : 외부에서 생성된 객체를 주입받아 사용한다.
-Ex) MenuContext.class : 생성자를 통해 Menu.class를 주입받아 사용 (의존성 주입)
+* MenuContext.class : 생성자를 통해 Menu.class를 주입받아 사용 (의존성 주입)
 
         public AdminMenuHandler(MenuContext menuContext) {
             this.menuContext = menuContext;
@@ -249,6 +249,6 @@ public class MenuContext {
   ```
 
 ### 환경설정
-Language : Java 11 <br>
+Language : Java <br>
 IDLE : IntelliJ <br>
 JDK : 17.0.8.1 LTS
